@@ -1,18 +1,18 @@
-
 <%=render 'shared/errors'%>
 <%=form_with(model: @article, local: true ) do |f|%>
  <div class="container shadow-lg p-5 my-5 bg-body rounded-3">
     <h3><b>Titolo</b></h3>
     <p>
      <!--<%= f.label :title%><br>-->
-      <%= f.text_field :title%>
+      <%= f.text_field :title, class: "w-100 p-1"%>
     </p>
 
     <h3><b>Descrizione</b></h3>
-    <p>
-       <!--<%= f.label :description%><br>-->
-       <%= f.text_area :description%>
-    </p>
+       
+     <p>
+        <!--<%= f.label :description%><br>-->
+       <%= f.text_area :description, class: "w-100 p-1"%>
+     </p>
     <p>
       <%= f.submit "Salva", class: "btn btn-warning" %>
     </p> 

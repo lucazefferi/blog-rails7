@@ -7,22 +7,24 @@
 
     <h3><b>Descrizione</b></h3>
     <p>
-        <%= @article.description%>
+       <%=  simple_format(@article.description)%>
     </p>
 
     
-
-    <div class="d-flex justify-content-between gap-2 mt-5">
+<div class="mt-5">
+    <div class="d-flex justify-content-between gap-2">
         <div>
-             <%= link_to 'Modifica', edit_article_path(@article.id), class: "btn btn-primary  px-1" %>
-        <%= link_to 'Cancella', article_path(@article.id),class: "btn btn-danger px-1", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+            <%= link_to 'Modifica', edit_article_path(@article.id), class: "btn btn-primary px-1" %>
+            <%= link_to 'Cancella', article_path(@article.id), class: "btn btn-danger px-1", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
         </div> 
-    
-        <div class="d-flex align-items-baseline">
-            <h6 class="card-text"><small class="text-muted">Creato <%= time_ago_in_words(@article.created_at)%></small> | </h6>
-            <h6 class="card-text"><small class="text-muted">&nbsp;Ultimo aggiornamento <%= time_ago_in_words(@article.updated_at) %></small></h6>
+
+        <div class="d-flex justify-content-end align-items-baseline">
+            <p class=" card-text fs-6"><small class="text-muted">Creato <%= time_ago_in_words(@article.created_at)%></small> |</p>
+            <p class="card-text fs-6"><small class="text-muted"> Ultimo aggiornamento <%= time_ago_in_words(@article.updated_at) %></small></p>
         </div>
     </div>
+</div>
+
 
  </div>
 
