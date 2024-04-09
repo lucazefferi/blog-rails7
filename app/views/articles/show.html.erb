@@ -1,0 +1,64 @@
+<br>
+ <div class="container shadow-lg p-5 my-5 bg-body rounded-3">
+    <h3><b>Titolo</b></h3>
+    <p>
+        <%= @article.title%>
+    </p>
+
+    <h3><b>Descrizione</b></h3>
+    <p>
+        <%= @article.description%>
+    </p>
+
+    
+
+    <div class="d-flex justify-content-between gap-2 mt-5">
+        <div>
+             <%= link_to 'Modifica', edit_article_path(@article.id), class: "btn btn-primary  px-1" %>
+        <%= link_to 'Cancella', article_path(@article.id),class: "btn btn-danger px-1", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+        </div> 
+    
+        <div class="d-flex align-items-baseline">
+            <h6 class="card-text"><small class="text-muted">Creato <%= time_ago_in_words(@article.created_at)%></small> | </h6>
+            <h6 class="card-text"><small class="text-muted">&nbsp;Ultimo aggiornamento <%= time_ago_in_words(@article.updated_at) %></small></h6>
+        </div>
+    </div>
+
+ </div>
+
+
+ <div class="container shadow-lg p-5 my-5 bg-body rounded-3">
+    <h3 class="mb-3"><b>Gestione commenti</b></h3>
+    <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+            <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
+            <div class="d-flex gap-2 w-100 justify-content-between">
+                <div>
+                    <h6 class="mb-0">Marco Rossi</h6>
+                    <p class="mb-0 opacity-75">Articolo fantastico, rispecchia la realtà</p>
+                </div>
+                <small class="opacity-50 text-nowrap">now</small>
+            </div>
+        </a>
+        <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+            <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
+            <div class="d-flex gap-2 w-100 justify-content-between">
+                <div>
+                    <h6 class="mb-0">Giulia Marzi</h6>
+                    <p class="mb-0 opacity-75">Fantastico! pensavo fosse più difficile</p>
+                </div>
+                <small class="opacity-50 text-nowrap">now</small>
+            </div>
+        </a>
+        <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+            <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
+            <div class="d-flex gap-2 w-100 justify-content-between">
+                <div>
+                    <h6 class="mb-0">Luca Zefferi</h6>
+                    <p class="mb-0 opacity-75">Tutto sommato semplice da realizzare, grazie.</p>
+                </div>
+                <small class="opacity-50 text-nowrap">1w</small>
+            </div>
+        </a>
+    </div>
+ </div>
