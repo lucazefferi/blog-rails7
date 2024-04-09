@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+    
+    #un utente può avere più articoli
+    has_many :articles
+
     #uniqueness: true -> rende unico lo username di default tiene conto delle maiuscole e minuscole quindi ("Luca" e "luca" per lui sono due string differenti)
     validates :username, uniqueness: true, 
                          presence: true, length: {minimum: 3, maximum: 25}
@@ -10,7 +14,4 @@ class User < ApplicationRecord
                       format:{with:VALID_EMAIL_REGEX,multiline:true}
 
                     
-
-    
-   
 end
