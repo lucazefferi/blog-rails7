@@ -1,4 +1,4 @@
-<%=render 'shared/errors'%>
+<%=render 'shared/errors', obj: @article%>
 <%=form_with(model: @article, local: true ) do |f|%>
  <div class="container shadow-lg p-5 my-5 bg-body rounded-3">
     <h3><b>Titolo</b></h3>
