@@ -1,5 +1,8 @@
 class User < ApplicationRecord
-    
+
+    #prima di salvare l'email la fa diventare downcase
+    before_save { self.email = email.downcase }
+
     #un utente può avere più articoli
     has_many :articles
 

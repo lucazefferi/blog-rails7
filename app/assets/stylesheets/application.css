@@ -14,4 +14,7 @@
  *= require_self
  */
 
+.z-index-2{
+    z-index: 2;
+}
 

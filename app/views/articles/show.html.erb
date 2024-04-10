@@ -1,5 +1,24 @@
 <br>
- <div class="container shadow-lg p-5 my-5 bg-body rounded-3">
+ <div class="container shadow-lg p-5 my-3 bg-body rounded-3">
+        <div class="d-flex align-items-center gap-3 mb-1">
+        <div class="pb-2">
+            <%= link_to edit_article_path(@article.id) do %>
+                <img width="20" height="20" src="<%= image_path('svg/pencil-square.svg') %>" alt="Your Blog">
+            <% end %>
+        </div>
+        <div class="pb-2">
+            <%= link_to article_path(@article.id), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } do %>
+                <img width="20" height="20" src="<%= image_path('svg/trash3-fill.svg') %>" alt="Your Blog">
+            <% end %>
+        </div>
+        <div class="ms-auto p-2">
+            <a href="#" class="d-flex align-items-center link-dark text-decoration-none" id="userReference" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+            <strong><%=  @article.user.username %> </strong>
+            </a>
+        </div>
+        </div>
+
     <h3><b>Titolo</b></h3>
     <p>
         <%= @article.title%>
@@ -11,18 +30,13 @@
     </p>
 
     
-<div class="mt-5">
-    <div class="d-flex justify-content-between gap-2">
-        <div>
-            <%= link_to 'Modifica', edit_article_path(@article.id), class: "btn btn-primary px-1" %>
-            <%= link_to 'Cancella', article_path(@article.id), class: "btn btn-danger px-1", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
-        </div> 
 
-        <div class="d-flex justify-content-end align-items-baseline">
-            <p class=" card-text fs-6"><small class="text-muted">Creato <%= time_ago_in_words(@article.created_at)%></small> |</p>
-            <p class="card-text fs-6"><small class="text-muted"> Ultimo aggiornamento <%= time_ago_in_words(@article.updated_at) %></small></p>
-        </div>
-    </div>
+    
+<div class="d-flex justify-content-end mt-5" >
+  <div class="p-2">
+     <small class="text-muted">Creato <%= time_ago_in_words(@article.created_at)%></small> |
+     <small class="text-muted"> Ultimo aggiornamento <%= time_ago_in_words(@article.updated_at) %></small>
+  </div>
 </div>
 
 
