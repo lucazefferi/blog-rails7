@@ -1,29 +1,31 @@
-<%=render 'shared/errors', obj: @user%>
+<div class="container pt-5 mt-3">
+  <%=render 'shared/errors', obj: @user%>
 
-<div class="d-flex justify-content-center text-center">
-  <%=form_with(model: @user, local: true ) do |f|%>
-    
+  <div class="d-flex justify-content-center text-center">
+    <%=form_with(model: @user, local: true ) do |f|%>
+      
 
-      <% if @user.new_record? %> 
-       <h1 class="h3 mb-3 fw-normal">Unisciti a noi!</h1>
-      <%else%>
-      <h1 class="h3 mb-3 fw-normal">Modifica profilo</h1>
-      <%end %>
+        <% if @user.new_record? %> 
+        <h1 class="h3 mb-3 fw-normal">Inserisci i dati per registrati</h1>
+        <%else%>
+        <h1 class="h3 mb-3 fw-normal">Modica i dati del tuo profilo</h1>
+        <%end %>
 
-    <div class="form-floating">
-        <%= f.text_field :username, class: "form-control", placeholder: "Username"%>
-        <label for="floatingUsername">Username</label>
-    </div>
-    <div class="form-floating">
-      <%= f.email_field :email, class: "form-control", placeholder: "Email"%>
-      <label for="floatingEmail">Email</label>
-    </div>
-    <div class="form-floating">
-      <%= f.password_field :password, class: "form-control", placeholder: "Password"%>
-      <label for="floatingPassword">Password</label>
-    </div>
-    
-     <%= f.submit(@user.new_record? ? "Registrati" : "Salva", class: "w-100 btn btn-lg btn-primary mt-3")%>
-     <p class="mt-5 mb-3 text-muted">© 2017–2021</p>
-  <%end %>
-</div>
+      <div class="form-floating">
+          <%= f.text_field :username, class: "form-control", placeholder: "Username"%>
+          <label for="floatingUsername">Username</label>
+      </div>
+      <div class="form-floating">
+        <%= f.email_field :email, class: "form-control", placeholder: "Email"%>
+        <label for="floatingEmail">Email</label>
+      </div>
+      <div class="form-floating">
+        <%= f.password_field :password, class: "form-control", placeholder: "Password"%>
+        <label for="floatingPassword">Password</label>
+      </div>
+      
+      <%= f.submit(@user.new_record? ? "Registrati" : "Salva", class: "w-100 btn btn-lg btn-primary mt-3")%>
+      <p class="mt-5 mb-3 text-muted">© 2017–2021</p>
+    <%end %>
+  </div>
+</div> 

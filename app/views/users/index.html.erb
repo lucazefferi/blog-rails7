@@ -1,0 +1,32 @@
+<div class="p-5">
+    <div class="row">
+        <% @users.each do |user| %>
+        <div class="col-sm-6 p-3 my-3">
+            <div class="card shadow-lg">
+                <%= link_to user_path(user.id), class: "text-decoration-none" do %>
+                <div class="d-flex p-3 justify-content-end">
+                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2" />
+                    <div class="pb-2">
+                        <strong class="text-dark"><%= user.username %></strong>
+                    </div>
+                </div>
+                <% end %>
+                <div class="card-body">
+                    <h5 class="card-title"><%= user.username %></h5>
+                    <p class="card-text"><%= user.email %></p>
+                    <br>
+                    <div class="d-flex justify-content-end">
+                        <h6 class="card-text"><small class="text-muted">Creato <%= time_ago_in_words(user.created_at)%> fa</small></h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>
+<div class="apple_pagination">
+    <div class="page_info">
+      <%= page_entries_info @users %>
+    </div>
+    <%= will_paginate @users, :container => false %>
+</div>

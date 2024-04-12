@@ -1,39 +1,9 @@
-<div class="p-5">
-    <div class="row">
-          <%= link_to new_article_path, class: "fw-bold" do %>
-            <div class="d-flex gap-2 mt-3">
-              <img class="d-block mb-4" src="<%= image_path('svg/plus-circle.svg') %>" alt="" width="22" height="22">
-              Nuovo articolo
-            </div> 
-          <% end %>
 
-            <% @articles.each do |article| %>
-            <div class="col-sm-6 p-3 my-3">
-              <div class="card shadow-lg">
-                <div class="d-flex p-3 justify-content-end">
-                  <a href="#" class="d-flex align-items-center link-dark text-decoration-none" id="userReference" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                    <strong><%= article.user.username%></strong>
-                  </a>
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title"><%= article.title %></h5>
-                  <p class="card-text"><%= article.description.truncate(35, separator: ' ') %></p>
-                  
-                  <%= link_to 'Apri', article_path(article.id), class: "btn btn-primary" %>
-                  <div class="d-flex  justify-content-end">
-                      <h6 class="card-text"><small class="text-muted">Creato <%= time_ago_in_words(article.created_at)%></small> | </h6>
-                      <h6 class="card-text"><small class="text-muted">&nbsp;Ultimo aggiornamento <%= time_ago_in_words(article.updated_at) %></small></h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <% end %>
-      </div>
+<%= render 'articles' %>
+
+<div class="apple_pagination">
+    <div class="page_info">
+      <%= page_entries_info @articles %>
+    </div>
+    <%= will_paginate @articles, :container => false %>
 </div>
-
-
-
-
-
-
