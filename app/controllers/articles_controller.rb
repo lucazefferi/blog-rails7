@@ -2,7 +2,9 @@ class ArticlesController < ApplicationController
     #prima di eseguire i metodi indicati dentro le [] eseguirà :set_article rendendo @article disponibile dentro i metodi senza cosi dover ripetere
     #"@article = Article.find(params[:id])" in tutti i metodi (DRY-> DONT REPEAT YOURSELF)"
     before_action :set_article, only: [:show, :edit, :update, :destroy]
-    
+    before_action :require_user, except: [:show, :index]
+    before_action :require_same_user, only: [:edit, :update, :destroy]
+
     def show
         #binding.breakp -> blocca il codice e fa partire il debug, scrivo params in console per vedere i parametri
         #@article = Article.find(params[:id])
@@ -19,7 +21,7 @@ class ArticlesController < ApplicationController
 
     def create
         @article = Article.new(article_params)
-        @article.user = User.first
+        @article.user = current_user
         if @article.save
             flash[:notice] = "Articolo salvato!"
             redirect_to article_path(@article)
@@ -63,6 +65,13 @@ class ArticlesController < ApplicationController
 
     def article_params
         params.require(:article).permit(:title, :description)
+    end
+
+    def require_same_user
+        if current_user !=  @article.user && !current_user.admin?
+          flash[:alert] = "Azione non autorizzata, puoi modificare o cancellare solo i tuoi articoli."  
+          redirect_to article_path(@article)
+        end
     end
 
 end

@@ -1,3 +1,30 @@
 .title-home{
     padding-top: 100px;
  }
+
+.bg-home{
+ background: rgb(0,207,240);
+ background: linear-gradient(90deg, rgba(0,207,240,1) 0%, rgba(38,0,255,1) 100%);
+ }
+
+ @keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+  }
+  
+  .fadeIn {
+    animation-name: fadeIn;
+    animation-duration: 2s;
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-30px);}
+    60% {transform: translateY(-15px);}
+  }
+  
+  .bounce {
+    animation: bounce 2s;
+  }
+  
+  

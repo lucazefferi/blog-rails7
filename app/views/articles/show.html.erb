@@ -1,22 +1,30 @@
 <br>
  <div class="container shadow-lg p-5 my-3 bg-body rounded-3">
         <div class="d-flex align-items-center gap-3 mb-1">
-        <div class="pb-2">
-            <%= link_to edit_article_path(@article.id) do %>
-                <img width="20" height="20" src="<%= image_path('svg/pencil-square.svg') %>" alt="Your Blog">
+            <%if logged_in? && (@article.user == current_user || current_user.admin? ) %>
+            <div class="pb-2">
+                <%= link_to edit_article_path(@article.id) do %>
+                    <img width="20" height="20" src="<%= image_path('svg/pencil-square.svg') %>" alt="Your Blog">
+                <% end %>
+            </div>
+            <div class="pb-2">
+                <%= link_to article_path(@article.id), data: { turbo_method: :delete, turbo_confirm: 'Sei sicuro di voler cancellare l\'articolo?' } do %>
+                    <img width="20" height="20" src="<%= image_path('svg/trash3-fill.svg') %>" alt="Your Blog">
+                <% end %>
+            </div>
             <% end %>
-        </div>
-        <div class="pb-2">
-            <%= link_to article_path(@article.id), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } do %>
-                <img width="20" height="20" src="<%= image_path('svg/trash3-fill.svg') %>" alt="Your Blog">
-            <% end %>
-        </div>
-        <div class="ms-auto p-2">
-            <a href="#" class="d-flex align-items-center link-dark text-decoration-none" id="userReference" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-            <strong><%=  @article.user.username %> </strong>
-            </a>
-        </div>
+            <div class="p-2 ms-auto">    
+                <div class="d-flex">
+                    <div>
+                     <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2" />
+                    </div>
+                    <div class="pb-2">  
+                      <%= link_to user_path(@article.user.id), class: "text-decoration-none" do %>
+                         <strong class="text-dark"><%= @article.user.username %></strong>
+                       <% end %>
+                    </div>
+                </div>
+            </div>
         </div>
 
     <h3><b>Titolo</b></h3>

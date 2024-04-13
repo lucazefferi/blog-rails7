@@ -4,7 +4,7 @@ class User < ApplicationRecord
     before_save { self.email = email.downcase }
 
     #un utente può avere più articoli
-    has_many :articles
+    has_many :articles, dependent: :destroy #dependent: :destroy se cancello l'utente anche tutti gli articoli verranno cancellati
 
     #uniqueness: true -> rende unico lo username di default tiene conto delle maiuscole e minuscole quindi ("Luca" e "luca" per lui sono due string differenti)
     validates :username, uniqueness: true, 

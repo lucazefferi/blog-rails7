@@ -1,80 +1,64 @@
-<br>
+<br />
+
 <div class="container">
+    <%if logged_in? && @user == current_user %>
     <h3>Gestione profilo</h3>
-</div>
+    <% else %>
+    <h3><%= @user.username %></h3>
+    <% end %>
 
- 
-<div class="container shadow-lg p-5 my-3 bg-body rounded-3">
-        <div class="d-flex align-items-center gap-3 mb-1">
-        <div class="pb-2">
-            <%= link_to edit_user_path(@user.id) do %>
-                <img width="20" height="20" src="<%= image_path('svg/pencil-square.svg') %>" alt="Your Blog">
-            <% end %>
-        </div>
-        <div class="pb-2 me-3">
-            <%= link_to user_path(@user.id), data: { turbo_method: :delete, turbo_confirm: 'Sei sicuro di voler eliminare il tuo profilo?' } do %>
-                <img width="20" height="20" src="<%= image_path('svg/trash3-fill.svg') %>" alt="Your Blog">
-            <% end %>
-        </div>
-         <div class="pb-2 flex-column me-2">
-            <div><strong>Username</strong></div>
-            <div><%=  @user.username %></div>
-        </div>
-         <div class="pb-2 flex-column ">
-            <div><strong>Email</strong></div>
-            <div><%=  @user.email %></div>
-        </div>
-
-            
-        <div class="ms-auto p-2">
-            <a href="#" class="d-flex align-items-center link-dark text-decoration-none" id="userReference" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-            </a>
-        </div>
-        </div>
- </div>
-
-<div class="p-5">
-    <div class="row">
-          <%= link_to new_article_path, class: "fw-bold" do %>
-            <div class="d-flex gap-2 mt-3">
-              <img class="d-block mb-4" src="<%= image_path('svg/plus-circle.svg') %>" alt="" width="22" height="22">
-              Nuovo articolo
-            </div> 
-          <% end %>
-
-            <% @articles.each do |article| %>
-            <div class="col-sm-6 p-3 my-3">
-              <div class="card shadow-lg">
-                <div class="d-flex p-3 justify-content-end">
-                  <a href="#" class="d-flex align-items-center link-dark text-decoration-none" id="userReference" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                    <strong><%= article.user.username%></strong>
-                  </a>
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title"><%= article.title %></h5>
-                  <p class="card-text"><%= article.description.truncate(35, separator: ' ') %></p>
-                  
-                  <%= link_to 'Apri', article_path(article.id), class: "btn btn-primary" %>
-                  <div class="d-flex  justify-content-end">
-                      <h6 class="card-text"><small class="text-muted">Creato <%= time_ago_in_words(article.created_at)%></small> | </h6>
-                      <h6 class="card-text"><small class="text-muted">&nbsp;Ultimo aggiornamento <%= time_ago_in_words(article.updated_at) %></small></h6>
-                  </div>
-                </div>
-              </div>
+    <div class="shadow-lg p-5 my-3 bg-body rounded-3">
+        <div class="d-flex gap-3">
+            <%if logged_in? && @user == current_user %>
+            <div class="pb-2">
+                <%= link_to edit_user_path(@user.id) do %>
+                <img width="20" height="20" src="<%= image_path('svg/pencil-square.svg') %>" alt="Your Blog" />
+                <% end %>
             </div>
-          <% end %>
-      </div>
+            <div class="pb-2 me-3">
+                <%= link_to user_path(@user.id), data: { turbo_method: :delete, turbo_confirm: 'Sei sicuro di voler eliminare il profilo?' } do %>
+                <img width="20" height="20" src="<%= image_path('svg/trash3-fill.svg') %>" alt="Your Blog" />
+                <% end %>
+            </div>
+            <% end %>
+        </div>
+        <div class="d-flex align-items-center gap-3 mb-1">
+            <div class="pb-2 flex-column me-2">
+                <div><strong>Username</strong></div>
+                <div><%= @user.username %></div>
+            </div>
+            <%if logged_in? && (@user == current_user || current_user.admin?) %>
+            <div class="pb-2 flex-column">
+                <div><strong>Email</strong></div>
+                <div><%= @user.email %></div>
+            </div>
+            <% end %>
+            <div class="pb-2 flex-column">
+                <div><strong>Articoli</strong></div>
+                <div><%= @user.articles.count %></div>
+            </div>
+
+            <div class="ms-auto p-2 d-flex">
+                <a href="#" class="d-flex align-items-center link-dark text-decoration-none" id="userReference" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2" />
+                </a>
+                <strong><span><%= @user.username %> </span></strong>
+            </div>
+        </div>
+
+        <%= link_to new_article_path, class: "fw-bold text-decoration-none text-dark" do %>
+        <div class="d-flex gap-2 mt-3">
+            <img class="d-block mb-4" src="<%= image_path('svg/plus-circle.svg') %>" alt="" width="30" height="30" />
+            Nuovo articolo
+        </div>
+        <% end %>
+    </div>
+    <%= render 'articles/articles' %>
 </div>
 
 <div class="apple_pagination">
     <div class="page_info">
-      <%= page_entries_info @articles %>
+        <%= page_entries_info @articles %>
     </div>
     <%= will_paginate @articles, :container => false %>
 </div>
-
-
-
-
