@@ -45,12 +45,13 @@
                 <strong><span><%= @user.username %> </span></strong>
             </div>
         </div>
-
-        <%= link_to new_article_path, class: "fw-bold text-decoration-none text-dark" do %>
-        <div class="d-flex gap-2 mt-3">
-            <img class="d-block mb-4" src="<%= image_path('svg/plus-circle.svg') %>" alt="" width="30" height="30" />
-            Nuovo articolo
-        </div>
+        <%if logged_in? && (@user == current_user) %>
+            <%= link_to new_article_path, class: "fw-bold text-decoration-none text-dark" do %>
+            <div class="d-flex gap-2 mt-3">
+                <img class="d-block mb-4" src="<%= image_path('svg/plus-circle.svg') %>" alt="" width="30" height="30" />
+                Nuovo articolo
+            </div>
+            <% end %>
         <% end %>
     </div>
     <%= render 'articles/articles' %>
