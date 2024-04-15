@@ -1,7 +1,8 @@
 <% if logged_in? %>
+
 <div class="px-4 text-center bg-home vh-100 ">
     <!--<img class="d-block mx-auto mb-4" src="<%= image_path('svg/logo.svg') %>" alt="" width="72" height="72">-->
-    <h1 class="display-5 text-white fw-bold title-home ">Ciao! <span class="text-warning"><%=current_user.username%></span> benvenuto su BlogCreator!</h1>
+    <h1 class="display-5 text-white fw-bold title-home">Ciao! <span class="text-warning"><%=current_user.username%></span> benvenuto su BlogCreator!</h1>
     <div class="col-lg-6 mx-auto">
       <p class="lead mb-4 text-white "> Inzia a dare sfogo alla tua creatività.</p>
     </div> 
@@ -15,7 +16,7 @@
 
  
 <%else%>
-<div class="px-4 text-center bg-primary">
+<div class="px-4 text-center bg-home">
     <!--<img class="d-block mx-auto mb-4" src="<%= image_path('svg/logo.svg') %>" alt="" width="72" height="72">-->
     <h1 class="display-5 fw-bold title-home">Benvenuto su BlogCreator!</h1>
     <div class="col-lg-6 mx-auto">
@@ -27,7 +28,7 @@
     </div>
     <div class="overflow-hidden" style="max-height: 30vh;">
       <div class="container px-5">
-        <img src="<%= image_path('png/bootstrap-docs.png') %>" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy">
+        <img src="<%= image_path('jpg/wp-home2.jpg') %>" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy">
       </div>
     </div>
 </div>
