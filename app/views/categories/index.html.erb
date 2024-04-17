@@ -1,0 +1,56 @@
+<div class="p-5 vh-100">
+
+    <h1>Visita le varie categorie</h1>
+    
+    <%if logged_in? && current_user.admin? %>
+        <%= link_to new_category_path, class: "fw-bold text-decoration-none text-dark" do %>
+            <div class="d-flex gap-2 mt-3">
+                <img class="d-block mb-4" src="<%= image_path('svg/plus-circle.svg') %>" alt="" width="30" height="30" />
+                    Nuovo categoria
+                </div>
+        <% end %>
+    <% end %>
+
+    <div class="row">
+        <% @categories.each do |category| %>
+        <div class="col-sm-4 p-3 my-3">
+            
+            <div class="card shadow-lg">
+                <div class="d-flex align-items-center">
+
+                    <%= link_to category_path(category.id), class: "text-decoration-none" do %>
+                        <div class="p-3">
+                            <div class="pb-2">
+                                <strong class="text-dark"><%= category.name %></strong>
+                            </div>
+                        </div>
+                    <% end %>
+
+                    <%if logged_in? && current_user.admin? %>
+                    <div class="ms-auto d-flex">
+                        <div class="p-3">
+                            <%= link_to category_path(category.id), data: { turbo_method: :delete, turbo_confirm: 'Sei sicuro di voler eliminare la categoria?' } do %>
+                                <img width="20" height="20" src="<%= image_path('svg/trash3-fill.svg') %>" alt="Cancella categoria">
+                            <% end %>
+                        </div>
+                        <div class="p-3">
+                            <%= link_to edit_category_path(category.id) do %>
+                            <img width="20" height="20" src="<%= image_path('svg/pencil-square.svg') %>" alt="Modifica categoria" />
+                            <% end %>
+                        </div>
+                    </div>
+                    <% end %>
+                    
+                </div>
+                    
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>
+<div class="apple_pagination">
+    <div class="page_info">
+      <%= page_entries_info @users %>
+    </div>
+    <%= will_paginate @users, :container => false %>
+</div>

@@ -1,21 +1,18 @@
 <div class="">
     <div class="row">
-  
           <% @articles.each do |article| %>
-            <div class="col-sm-6 p-3 my-3">
+            <div class="col-sm-6 p-3 my-3"> 
               <div class="card shadow-lg">
-              
-                  <div class="d-flex p-3 justify-content-end">
-                     
-                      <div>
-                        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2" />
-                      </div>
-                      <div class="pb-2">
-                        <%= link_to user_path(article.user.id), class: "text-decoration-none" do %>
-                          <strong class="text-dark"><%= article.user.username %></strong>
-                        <% end %>
-                      </div>
-                       
+                  <div class="d-flex p-3 gap-3">
+                       <%=render 'shared/categories', obj: article%>
+                        <div class="ms-auto">
+                          <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2" />
+                        </div>
+                        <div class="pb-2">
+                          <%= link_to user_path(article.user.id), class: "text-decoration-none" do %>
+                            <strong class="text-dark"><%= article.user.username %></strong>
+                          <% end %>
+                        </div>
                   </div>
                
                 <%= link_to article_path(article.id), class: "text-decoration-none text-dark" do %>

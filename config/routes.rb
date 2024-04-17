@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  # Defines all the path for articles
-  resources :articles
+  
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -11,12 +10,16 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "pages#home"
 
-  
   resources :users, except: [:new]
   get 'register', to: 'users#new'
 
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
+
+  # Defines all the path for articles
+  resources :articles
+
+  resources :categories
 
 end

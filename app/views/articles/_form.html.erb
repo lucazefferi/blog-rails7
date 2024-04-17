@@ -13,6 +13,17 @@
         <!--<%= f.label :description%><br>-->
        <%= f.text_area :description, class: "w-100 p-1"%>
      </p>
+
+     <h3><b>Categorie</b></h3>
+       
+     <p>
+        <!--<%= f.label :description%><br>-->
+       <%= f.collection_select :category_ids, Category.all, :id, :name, 
+           {prompt: "Scegli le varie categorie"}, {multiple: true, size: 3, class: "form-select"} %>
+
+     </p>
+
+
     <p>
       <%= f.submit "Salva", class: "btn btn-warning" %>
     </p> 

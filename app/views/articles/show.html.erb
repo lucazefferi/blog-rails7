@@ -2,17 +2,20 @@
  <div class="container shadow-lg p-5 my-3 bg-body rounded-3">
         <div class="d-flex align-items-center gap-3 mb-1">
             <%if logged_in? && (@article.user == current_user || current_user.admin? ) %>
-            <div class="pb-2">
-                <%= link_to edit_article_path(@article.id) do %>
-                    <img width="20" height="20" src="<%= image_path('svg/pencil-square.svg') %>" alt="Your Blog">
-                <% end %>
-            </div>
-            <div class="pb-2">
-                <%= link_to article_path(@article.id), data: { turbo_method: :delete, turbo_confirm: 'Sei sicuro di voler cancellare l\'articolo?' } do %>
-                    <img width="20" height="20" src="<%= image_path('svg/trash3-fill.svg') %>" alt="Your Blog">
-                <% end %>
-            </div>
+                <div class="pb-2">
+                    <%= link_to edit_article_path(@article.id) do %>
+                        <img width="20" height="20" src="<%= image_path('svg/pencil-square.svg') %>" alt="Your Blog">
+                    <% end %>
+                </div>
+                <div class="pb-2">
+                    <%= link_to article_path(@article.id), data: { turbo_method: :delete, turbo_confirm: 'Sei sicuro di voler cancellare l\'articolo?' } do %>
+                        <img width="20" height="20" src="<%= image_path('svg/trash3-fill.svg') %>" alt="Your Blog">
+                    <% end %>
+                </div>
             <% end %>
+
+            <%=render 'shared/categories', obj: @article%>
+        
             <div class="p-2 ms-auto">    
                 <div class="d-flex">
                     <div>

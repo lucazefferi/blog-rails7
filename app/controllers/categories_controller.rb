@@ -1,9 +1,9 @@
-class ArticlesController < ApplicationController
+class CategoriesController < ApplicationController
     #prima di eseguire i metodi indicati dentro le [] eseguirà :set_article rendendo @article disponibile dentro i metodi senza cosi dover ripetere
     #"@article = Article.find(params[:id])" in tutti i metodi (DRY-> DONT REPEAT YOURSELF)"
-    before_action :set_article, only: [:show, :edit, :update, :destroy]
+    before_action :set_category, only: [:show, :edit, :update, :destroy]
     before_action :require_user, except: [:show, :index]
-    before_action :require_same_user, only: [:edit, :update, :destroy]
+    before_action :require_admin, only: [:edit, :update, :destroy]
 
     def show
         #binding.breakp -> blocca il codice e fa partire il debug, scrivo params in console per vedere i parametri
@@ -11,20 +11,19 @@ class ArticlesController < ApplicationController
     end
 
     def index
-        @articles = Article.paginate(page: params[:page], per_page: 5)
+        @categories = Category.paginate(page: params[:page], per_page: 5)
     end
 
     #mostra il form per creare un nuovo articolo
     def new
-        @article = Article.new
+        @category = Category.new
     end
 
     def create
-        @article = Article.new(article_params)
-        @article.user = current_user
-        if @article.save
-            flash[:notice] = "Articolo salvato!"
-            redirect_to article_path(@article)
+        @category = Category.new(category_params)
+        if @category.save
+            flash[:notice] = "Categoria salvata!"
+            redirect_to category_path(@category)
         else
             #flash[:alert] = "Articolo non salvato!"
             render 'new', status: :unprocessable_entity
@@ -40,9 +39,9 @@ class ArticlesController < ApplicationController
     def update
         #@article = Article.find(params[:id])
         puts params
-        if @article.update(article_params)
-            flash[:notice] = "Articolo modificato!"
-            redirect_to article_path(@article)
+        if @category.update(category_params)
+            flash[:notice] = "Categoria modificata!"
+            redirect_to category_path(@category)
         else
             #flash[:alert] = "Articolo non modificato!"
             render 'edit', status: :unprocessable_entity
@@ -51,27 +50,27 @@ class ArticlesController < ApplicationController
 
     def destroy
         #@article = Article.find(params[:id])
-        if @article.destroy 
-            flash[:notice] = "Articolo rimosso!"
-            redirect_to articles_path
+        if @category.destroy 
+            flash[:notice] = "Categoria rimossa!"
+            redirect_to category_path
         end
     end
 
     private #sotto sono metodi privati
 
-    def set_article
-        @article = Article.find(params[:id])
+    def set_category
+        @category = Category.find(params[:id])
     end
 
-    def article_params
-        params.require(:article).permit(:title, :description, category_ids: [])
+    def category_params
+        params.require(:category).permit(:name)
     end
 
-    def require_same_user
-        if current_user !=  @article.user && !current_user.admin?
-          flash[:alert] = "Azione non autorizzata, puoi modificare o cancellare solo i tuoi articoli."  
-          redirect_to article_path(@article)
-        end
+    def require_admin
+        if !current_user.admin?
+            flash[:alert] = "Azione non autorizzata, non puoi modificare le categorie."  
+            redirect_to root_path
+          end
     end
 
 end

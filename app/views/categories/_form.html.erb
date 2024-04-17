@@ -1,0 +1,13 @@
+<%=render 'shared/errors', obj: @category%>
+<%=form_with(model: @category, local: true ) do |f|%>
+ <div class="container shadow-lg p-5 my-5 bg-body rounded-3">
+    <h3><b>Nome categoria</b></h3>
+    <p>
+     <!--<%= f.label :title%><br>-->
+      <%= f.text_field :name, class: "w-100 p-1"%>
+    </p>
+    <p>
+      <%= f.submit "Salva", class: "btn btn-warning" %>
+    </p> 
+  </div>
+<%end %>
