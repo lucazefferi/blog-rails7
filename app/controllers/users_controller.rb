@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     #prima di eseguire i metodi indicati dentro le [] eseguirà :set_user rendendo @user disponibile dentro i metodi senza cosi dover ripetere
     #"@User = User.find(params[:id])" in tutti i metodi (DRY-> DONT REPEAT YOURSELF)"
     before_action :set_user, only: [:show, :edit, :update, :destroy]
-    before_action :require_user, except: [:show, :index, :create, :new]
+    before_action :require_user, except: [:show, :index, :create, :new, :search]
     before_action :require_same_user, only: [:edit, :update, :destroy]
 
     def new
@@ -52,6 +52,7 @@ class UsersController < ApplicationController
       def destroy
           #@user = User.find(params[:id])
           if @user.destroy 
+             UserMailer.goodbye_email(@user).deliver_now
               flash[:notice] = "Il profilo e tutti gli articoli associati sono stati elimanti!"
               if current_user == @user
               session[:user_id] = nil
@@ -59,6 +60,12 @@ class UsersController < ApplicationController
               end
           end
       end
+
+      
+    def search
+        @users = User.where('username LIKE ?', "%#{params[:query]}%").limit(5)
+        render json: @users
+    end
 
     private
 
@@ -77,5 +84,6 @@ class UsersController < ApplicationController
           redirect_to user_path(@user)
         end
     end
+
 
 end

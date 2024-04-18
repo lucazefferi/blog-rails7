@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :users, except: [:new]
   get 'register', to: 'users#new'
+  get 'search', to: 'users#search'
 
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'

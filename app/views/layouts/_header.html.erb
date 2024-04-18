@@ -32,10 +32,43 @@
               </li>
              <%end%>
           </ul>
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Digita un nome" aria-label="Search">
-            <button class="btn btn-warning" type="submit">Cerca</button>
-          </form>
-        </div>
+          <div class="ms-auto">
+              <input autocomplete="off" class="form-control me-2" type="search" id="searchUser" placeholder="Cerca blogger" aria-label="Search">
+              <ul class="list-group position-absolute" id="user-list">
+              </ul>
+          <div>
+       <div>
       </div>
     </nav>
+
+<script>
+
+      $('#searchUser').on('keyup', function() {
+        var query = $(this).val();
+        if (query.length <= 2) {
+        return;
+        }
+        $.ajax({
+          url: '/search',
+          method: 'GET',
+          data: {query: $(this).val()},
+          dataType: 'json',
+          success: function(data) {
+              $('#user-list').empty();
+              data.forEach(function(user) {
+                var link = $('<a>').attr('href', '/users/' + user.id).addClass('nav-link').text(user.username);
+                var listItem = $('<li>').addClass("list-group-item").append(link);
+                $('#user-list').append(listItem);
+              });
+          }
+      });
+    });
+
+    $('#searchUser').on('focusout', function() {
+       setTimeout(() => { 
+       $('#user-list').empty();
+        }, 100);
+    });
+
+</script>
+

@@ -15,6 +15,9 @@
                 <img width="20" height="20" src="<%= image_path('svg/pencil-square.svg') %>" alt="Your Blog" />
                 <% end %>
             </div>
+            <% end %>
+
+            <%if logged_in? && (@user == current_user || current_user.admin?)%>
             <div class="pb-2 me-3">
                 <%= link_to user_path(@user.id), data: { turbo_method: :delete, turbo_confirm: 'Sei sicuro di voler eliminare il profilo?' } do %>
                 <img width="20" height="20" src="<%= image_path('svg/trash3-fill.svg') %>" alt="Your Blog" />
