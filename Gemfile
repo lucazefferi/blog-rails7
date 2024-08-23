@@ -69,7 +69,7 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
-  gem "selenium-webdriver"
+  gem "selenium-webdriver", ">= 4.20.0"
 end
 
 gem "cssbundling-rails", "~> 1.4"
